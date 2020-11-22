@@ -14,5 +14,9 @@
 			"<all_urls>"
 		],
 		"js": ["p5.js", "html2canvas.js", "script.js", "main.js", "Codebird.js"]
-	}]
+    }],
+    "permissions": [
+        "tabs",
+        "storage"
+    ]
 }
