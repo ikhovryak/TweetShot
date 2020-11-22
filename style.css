@@ -1,0 +1,20 @@
+/* CSS files add styling rules to your content */
+html{
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  position: absolute;
+}
+
+body {
+  font-family: helvetica, arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-style: italic;
+  color: #373fff;
+}
