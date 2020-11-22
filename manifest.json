@@ -9,11 +9,12 @@
         "default_popup": "index2.html",
         "post": "post.html"
     },
+    
 	"content_scripts": [{
 		"matches": [
 			"<all_urls>"
 		],
-		"js": ["p5.js", "html2canvas.js", "script.js", "main.js", "Codebird.js"]
+		"js": ["p5.js", "html2canvas.js", "post.js", "main.js", "Codebird.js"]
     }],
     "permissions": [
         "tabs",
