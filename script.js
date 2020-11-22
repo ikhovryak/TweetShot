@@ -18,11 +18,10 @@ chrome.storage.local.get('working', (response) => {
 var s = function(sketch){
 
     sketch.setup = function() {
-        if (working){
-            // Canvas & color settings
-            var cnv = sketch.createCanvas(sketch.windowWidth, sketch.windowHeight);
-            cnv.position(0, 0, 'fixed');
-        }
+        
+        // Canvas & color settings
+        var cnv = sketch.createCanvas(sketch.windowWidth, sketch.windowHeight);
+        cnv.position(0, 0, 'fixed');
         deltaY = 0;
     }
 
@@ -67,8 +66,8 @@ var s = function(sketch){
         console.log('finalX', finalX)
         console.log('finalY', finalY + deltaY)
         html2canvas(document.body, {
-            x: window.scrollX + startedX,
-            y: window.scrollY + startedY,
+            x: startedX,
+            y: deltaY + startedY,
             width: finalX - startedX,
             height: finalY - startedY,
             logging: true,
