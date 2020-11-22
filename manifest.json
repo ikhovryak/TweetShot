@@ -14,10 +14,11 @@
 		"matches": [
 			"<all_urls>"
 		],
-		"js": ["p5.js", "html2canvas.js", "post.js", "main.js", "Codebird.js"]
+		"js": ["p5.js", "html2canvas.js", "Codebird.js", "script.js", "main.js",  "post.js" ]
     }],
     "permissions": [
         "tabs",
-        "storage"
+        "storage",
+        "activeTab"
     ]
 }

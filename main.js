@@ -1,6 +1,24 @@
 var cb = new Codebird;
 cb.setConsumerKey("t7X6NW8MUzqCwt4mh2Ij7JXsT", "vIHcvrSWyD7Zivbe2joxElXrs5m07QfhlRa9adNoPgsJmQ7xo1");
 cb.setToken("2771139017-0vHw4QVzeQPoXPq60jfiqQUBfRMjrNxK6ddrdTJ", "yNYNITQ361PQ4HVuGrDGuINbqjCKpAjZhrTI7VWLA5FGn");
+// if(localStorage.getItem("oauth_token")){
+//     cb.setToken(localStorage.getItem("oauth_token"), localStorage.getItem("oauth_token_secret"));
+    
+// }
+
+
+document.querySelector('#testbutton').addEventListener('click', () => {
+  console.log("triggeed");
+  var working = true;
+    chrome.storage.local.set({ working });
+// get all the google tabs and send a message to their tabs 
+    chrome.tabs.query({ active: true }, tabs => {
+        tabs.forEach(tab => 
+      chrome.tabs.sendMessage(tab.id, { working } )
+    );
+  });
+});
+
 
 function logIn() {
     console.log(document.getElementById("PINFIELD").value);
@@ -33,32 +51,32 @@ function logIn2() {
 document.querySelector("#login_button").onclick = logIn;
 
 
-cb.__call(
-    "oauth_requestToken",
-    {oauth_callback: "oob"},
-    function (reply,rate,err) {
-        if (err) {
-            console.log("error response or timeout exceeded" + err.error);
-        }
-        if (reply) {
-            // stores it
-            console.log(reply.oauth_token);
-            cb.setToken(reply.oauth_token, reply.oauth_token_secret);
+// cb.__call(
+//     "oauth_requestToken",
+//     {oauth_callback: "oob"},
+//     function (reply,rate,err) {
+//         if (err) {
+//             console.log("error response or timeout exceeded" + err.error);
+//         }
+//         if (reply) {
+//             // stores it
+//             console.log(reply.oauth_token);
+//             cb.setToken(reply.oauth_token, reply.oauth_token_secret);
 
-            // gets the authorize screen URL
-            cb.__call(
-                "oauth_authorize",
-                {},
-                function (auth_url) {
-                    let window_params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
-                    width=600,height=300,left=100,top=100`;
-                    window.codebird_auth = window.open(auth_url, "login", window_params);
+//             // gets the authorize screen URL
+//             cb.__call(
+//                 "oauth_authorize",
+//                 {},
+//                 function (auth_url) {
+//                     let window_params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
+//                     width=600,height=300,left=100,top=100`;
+//                     window.codebird_auth = window.open(auth_url, "login", window_params);
                     
-                }
-            );
-        }
-    }
-);
+//                 }
+//             );
+//         }
+//     }
+// );
 
 
 

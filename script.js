@@ -4,6 +4,8 @@
 
 let windowX, windowY, selectionX, selectionY, locked, shotLocked, startedX, startedY, finalX, finalY, deltaY, imageBase64, working, empty;
 
+chrome.storage.local.set({"current_tab":document.URL});
+
 chrome.storage.local.get('working', (response) => {
     if (response.working) {
         empty = 0;
@@ -75,6 +77,8 @@ var s = function(sketch){
             // document.body.appendChild(canvas);
             var imageBase64 = canvas.toDataURL();
             console.log('base64: ', imageBase64);
+            localStorage.setItem("base64", imageBase64.split(",")[1]);
+
         })
     }
 
