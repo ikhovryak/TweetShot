@@ -3,176 +3,39 @@
 <html>
 <head>
     <script type="text/javascript" src="Codebird.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    <style>
+        body {width: 350px;}
+        html   {width: 350px;}
+    </style>
 </head>
 <body>
-    <script>
-            var cb = new Codebird;
-            cb.setConsumerKey("t7X6NW8MUzqCwt4mh2Ij7JXsT", "vIHcvrSWyD7Zivbe2joxElXrs5m07QfhlRa9adNoPgsJmQ7xo1");
-            cb.setToken("2771139017-0vHw4QVzeQPoXPq60jfiqQUBfRMjrNxK6ddrdTJ", "yNYNITQ361PQ4HVuGrDGuINbqjCKpAjZhrTI7VWLA5FGn");
-    </script>
-    
-    <script>
-        function openFile(file) {
-            var input = file.target;
-
-            var reader = new FileReader();
-            reader.onload = function(){
-                var dataURL = reader.result;
-                var output = document.getElementById('output');
-                output.src = dataURL;
-            };
-            reader.readAsDataURL(input.files[0]);
-            return dataURL;
-        };
-        
-        function upload_media(text){
-            var form_input = document.getElementById("myform");
-
-            var tweet_text = document.getElementById("tweetText").value;
-            var text = form_input.elements[1].value;
-            var img = document.getElementById("screenshot").files[0];
-
-            const reader = new FileReader();
-            const preview = document.getElementById('preview_image');
-
-            reader.addEventListener("load", function () {
-                // convert image file to base64 string
-                preview.src = reader.result;
-            }, false);
-
-            if (img) {
-                reader.readAsDataURL(img);
-                image64 = reader.result;
-                console.log("success");
-                console.log(image64.split(",")[1]);
-            }
-            console.log(text);
-            
-            //upload media if it exists first
-            //encode media
-            // var image64 = imgToBase64(image);
-
-            // var image64 = image.toDataURL().split(",")[1];
-            // console.log(image64);
-            var params_2 = {
-                media_data: "iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAB+0lEQVR42mP8//8/Ay0BEwONwagFoxZQDljI0PP8x7/Z93/e+PxXmpMpXp5dh4+ZgYHh0bd/clxYnMuINaMtfvRLgp3RVZwVU+rkuz+eRz+//wXVxcrEkKnEceXTX0dRlhoNTmKDaOvzXwHHv6x9+gtN/M9/hpjTX+GmMzAw/P7HMOnOj+ff//35x/Ds+z9iLfjPwPDt7//QE1/Sz319/RNh3PkPf+58+Yup/t7Xf9p8zFKcTMRa4CLGCrFm1v2fSjs+pJ/7uuvl7w+//yO7HRkUq3GEyrCREMk+kqy2IiyH3/xhYGD48uf/rPs/Z93/yczIwM3CiFU9Hw5xnD4ouvTt4Tf0AP37n+HTb+w+UOBmIs2CICm2R9/+EZlqGRkYzIVYSLMgRIYtUYGdSAsMBFgUuJhIy2iMDAwt2pysjAwLHv78RcgnOcrs5BQVHEyMG579Imi6Nh9zrBxZFgixMW624pXnwldYcTAzLjDhZmUit7AzE2K54c7fp8eF1QhWRobFptwmgiwkF3b//jMwMjJ8+P3/zPs/yx/9Wvr412+MgBJlZ1xsyuOOrbAibMHH3/87b32fce/nR2ypnpuFMVGevU6TQ5SdqKKeEVez5cuf/7te/j727s+9L/++/v3PzcyowM1kIcTiLs7Kz8pIfNnOONouGrVg1AIGAJ6gvN4J6V9GAAAAAElFTkSuQmCC"
-            };
-            cb.__call("media_upload",params_2,function (reply, rate, err) {
-                    // you get a media id back:
-
-                    
-                    console.log(reply.media_id_string);
-                    // return reply.media_id_string;
-                    // console.log(text);
-
-                    // var params = {
-                    //     media_ids: reply.media_id_string,
-                    //     status: text
-                    // };
-                    // cb.__call("statuses_update", params, function(reply, rate, err) {
-                    //     console.log(reply);
-                    // });
-                }
-            );
-            }
-
-        function post_tweet(text){
-            var image_id = upload_media();
-            var params = {
-                "media_ids": image_id,
-                "status": text
-                
-            };
-            cb.__call("statuses_update", params, function(reply, rate, err) {
-                console.log(reply);
-        });
-        
-        }
-
-        
-            
-        
-        
-    </script>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        TweetShot
-    </nav>
         <main main role="main" class="container text-center py-3">
+            
             <div class="row">
                 <div class="col-sm">
-                    <form id="myform" action="/action_page.php">
-                        <input type="file" id="screenshot" name="screenshot" accept="image/png, image/jpeg">
-                        <img id='preview_image' style="height:100px">
-                        <input type="text" id="text" name="text">
-                    </form>
-                    <button class="btn btn-outline-primary btn-block" type="button" id="tweet_button" onclick="upload_media()">Tweet!</button>
+                    <h5>TweetShot</h5>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm">
-                    <button class="btn btn-primary btn-block" type="button" id="tweet_button" onclick="upload_media()">Take a screenshot</button>
-
-                    <!-- If screenshot: -->
-                    <!-- make a screenshot -->
-                    <!-- if made, preview it as image -->
-                    <div class="form-group text-left ">
-                        <label for="tweet_text">Tweet text:</label>
-                        <textarea onkeyup="textCounter(this,'counter',300)" class="form-control" id="tweet_text" rows="3" maxlength="300"></textarea>
-                        <!-- <div class="form-group mb-2 text-right"> -->
-                        <input disabled  maxlength="3" size="2" value="300" id="counter" class="float-right form-control-plaintext text-right text-secondary">
-                        
-                    </div>
-                    <div class="form-check text-left">
-                        <input class="form-check-input" type="radio" value="" onclick="addLink()" id="link_check">
-                        <label class="form-check-label" for="link_check">Include website link</label> <br/>
-                        <span class="text-warning" id="lengthWarning"></span>
-                    </div>
-                    <script>
-                        function addLink(){
-                            link = document.URL;
-                            prevValue = document.getElementById("tweet_text").value;
-                            if(prevValue.length+link.length<=299){
-                                document.getElementById("tweet_text").value= prevValue + " " + document.URL;
-                            }
-                            else{
-                                document.getElementById("lengthWarning").innerHTML = "Adding the link would exceed the tweet length limit.";
-                            }
-                            
-                        }
-
-                        function textCounter(field,field2,maxlimit)
-                        {
-                            var countfield = document.getElementById(field2);
-                            if ( field.value.length > maxlimit ) {
-                            field.value = field.value.substring( 0, maxlimit );
-                            return false;
-                            } else {
-                            countfield.value = maxlimit - field.value.length;
-                            }
-                        }
-                    </script>
-                    <div class="form-group">
-                        <button type="button" class="btn btn-primary">Tweet!</button>
-                        <button type="button" class="btn btn-outline-secondary">Cancel</button>
-                    </div>
-            
-                    
+                    <div id="alert_space"></div>
+                    <a href="post.html" class="btn btn-primary btn-block" type="button"  >Tweet a screenshot</a>
+                    <a href="post.html" class="btn btn-primary btn-block" type="button" >Tweet this page</a>
+                    <a href="https://github.com/ikhovryak/TweetShot" target="_blank"  class="btn btn-outline-secondary btn-block" type="button">Info about TweetShot</a>
                 
-
-                    <button class="btn btn-primary btn-block" type="button" id="tweet_button" onclick="upload_media()">Tweet this page</button>
-                    <button class="btn btn-outline-secondary btn-block" type="button" id="tweet_button" onclick="upload_media()">Info about TweetShot</button>
                 </div>
             </div>
 
 
                 
             
-        </main>>
+        </main>
     
 
-
+    <script type="text/javascript" src="main.js"></script>
     <script src="jquery_slim_min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="popper_min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="bootstrap_min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>

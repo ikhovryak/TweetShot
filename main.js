@@ -15,11 +15,14 @@ function openFile(file) {
     return dataURL;
 };
 
+
+function send_tweet(){
+    upload_media();
+    location.reload();
+    document.getElementById("alert_space").innerHTML = "<div class='alert alert-success' role='alert'>Tweet was posted!</div>";
+}
 function upload_media()
 {
-    // var form_input = document.getElementById("myform");
-    // var text = form_input.elements[1].value;
-
     var tweet_text = document.getElementById("tweet_text").value;
     // var img = document.getElementById("screenshot").files[0];
 
@@ -51,19 +54,25 @@ function upload_media()
                     media_ids: reply.media_id_string,
                     status: tweet_text
                 };
-                cb.__call("statuses_update", params, function(reply, rate, err) {
-                    console.log(reply);
-                });
+                // cb.__call("statuses_update", params, function(reply, rate, err) {
+                //     console.log(reply);
+                // });
         });}
         else{
             var params = {
                 status: tweet_text
             };
-            cb.__call("statuses_update", params, function(reply, rate, err) {
-                console.log(reply);
-            });
+            // cb.__call("statuses_update", params, function(reply, rate, err) {
+            //     console.log(reply);
+            // });
         }
-        document.getElementById("alert_space").innerHTML = "<div class='alert alert-success' role='alert'>Tweet was posted!</div>"
+        // window.location.href = "index2.html";
+
+        document.getElementById("tweet_text").disabled=true;
+        document.getElementById("tweet_button").disabled=true;
+        document.getElementById("link_check").disabled=true;
+
+        document.getElementById("alert_space").innerHTML = "<div class='alert alert-success' role='alert'>Tweet was posted! <a href='index2.html' style='text-success'>Back to main</a></div>";
 
     }
     // Flash success
